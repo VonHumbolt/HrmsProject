@@ -3,19 +3,24 @@ package kodlamaio.hrms.entities.concretes;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data 
 @Entity 
 @Table(name="employer")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employer {
 
 	@Id 
-	@GeneratedValue
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="employer_id")
 	private int id;
 	
 	@Column(name="user_id")
@@ -36,20 +41,5 @@ public class Employer {
 	@Column(name="hrms_vertification")
 	private boolean hrmsVertification;
 	
-	public Employer() {
-		
-	}
-
-	public Employer(int id, int userId, String companyName, String webSite, String phoneNumber,
-			boolean emailVertification, boolean hrmsVertification) {
-		super();
-		this.id = id;
-		this.userId = userId;
-		this.companyName = companyName;
-		this.webSite = webSite;
-		this.phoneNumber = phoneNumber;
-		this.emailVertification = emailVertification;
-		this.hrmsVertification = hrmsVertification;
-	}
 	
 }

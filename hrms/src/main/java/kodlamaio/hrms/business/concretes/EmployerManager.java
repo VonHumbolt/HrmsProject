@@ -6,6 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.EmployerService;
+import kodlamaio.hrms.core.abstracts.EmailService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
+import kodlamaio.hrms.core.utilities.results.Result;
+import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
 
@@ -13,17 +19,31 @@ import kodlamaio.hrms.entities.concretes.Employer;
 public class EmployerManager implements EmployerService{
 
 	private EmployerDao employerDao;
+	private EmailService emailService;
 	
 	@Autowired 
-	public EmployerManager(EmployerDao employerDao) {
+	public EmployerManager(EmployerDao employerDao, EmailService emailService) {
 		super();
 		this.employerDao = employerDao;
+		this.emailService = emailService;
 	}
 	
 	@Override
-	public List<Employer> getAll() {
+	public DataResult<List<Employer>> getAll() {
 		
-		return this.employerDao.findAll();
+		return new SuccessDataResult<List<Employer>>(this.employerDao.findAll());
+	}
+
+	@Override
+	public Result add(Employer employer) {
+		
+		if(!this.emailService.isEmailVerified()) {
+			return new ErrorResult("Email Doğrulama kodunuzu onaylayınız.");
+		}
+		
+		this.employerDao.save(employer);
+		
+		return new SuccessResult("Kayıt Başarılı");
 	}
 
 }
