@@ -14,6 +14,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
+import kodlamaio.hrms.entities.concretes.JobAdvert;
 
 @Service
 public class EmployerManager implements EmployerService{
@@ -45,5 +46,6 @@ public class EmployerManager implements EmployerService{
 		
 		return new SuccessResult("Kayıt Başarılı");
 	}
+
 
 }

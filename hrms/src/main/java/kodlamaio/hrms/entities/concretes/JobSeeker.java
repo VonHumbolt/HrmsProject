@@ -15,15 +15,15 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="job_seeker")
+@Table(name="job_seekers")
 @NoArgsConstructor 
 @AllArgsConstructor
 public class JobSeeker {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+	@Column(name="job_seeker_id")
+	private int jobSeekerId;
 	
 	@Column(name="user_id")
 	private int userId;

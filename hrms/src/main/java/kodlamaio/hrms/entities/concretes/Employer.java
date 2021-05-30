@@ -1,10 +1,13 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 @Data 
 @Entity 
-@Table(name="employer")
+@Table(name="employers")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employer {
@@ -21,7 +24,7 @@ public class Employer {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="employer_id")
-	private int id;
+	private int employerId;
 	
 	@Column(name="user_id")
 	private int userId;
@@ -41,5 +44,6 @@ public class Employer {
 	@Column(name="hrms_vertification")
 	private boolean hrmsVertification;
 	
-	
+	@OneToMany(mappedBy = "employer")
+	private List<JobAdvert> jobAdverts;
 }

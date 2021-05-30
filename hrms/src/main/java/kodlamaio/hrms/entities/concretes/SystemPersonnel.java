@@ -13,14 +13,14 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="system_personnel")
+@Table(name="system_personnels")
 @NoArgsConstructor
 @AllArgsConstructor
 public class SystemPersonnel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+	@Column(name="system_personnel_id")
+	private int systemPersonnelId;
 	
 	@Column(name="user_id")
 	private int userId;
