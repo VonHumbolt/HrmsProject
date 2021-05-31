@@ -13,6 +13,7 @@ import kodlamaio.hrms.business.abstracts.JobAdvertService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobAdvert;
+import kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto;
 
 @RestController
 @RequestMapping("/api/jobAdverts")
@@ -29,18 +30,29 @@ public class JobAdvertsController {
 		return this.jobAdvertService.getAll();
 	}
 	
+	@GetMapping("/getJobAdvertDetails")
+	public DataResult<List<JobAdvertDetailsDto>> getJobAdvertDetailsDtos(){
+		return this.jobAdvertService.getJobAdvertDetailsDtos();
+	}
+	
 	@GetMapping("/getByEmployerId")
 	public DataResult<List<JobAdvert>> getByEmployerId(@RequestParam int employerId){
 		return this.jobAdvertService.getByEmployerId(employerId);
 	}
 	
-	@GetMapping("/getBySortedDate")
-	public DataResult<List<JobAdvert>> sortByAdvertDate(){
-		return this.jobAdvertService.sortByAdvertDate();
+	@GetMapping("/getJobAdvertByEmployerId")
+	public DataResult<List<JobAdvertDetailsDto>> getJobAdvertDetailsDtosByEmployerId(@RequestParam int employerId){
+		return this.jobAdvertService.getJobAdvertDetailsDtosByEmployerId(employerId);
 	}
+	
 	
 	@PostMapping("/closeJobAdvert")
 	public Result closeJobAdvert(@RequestBody JobAdvert jobAdvert) {
 		return this.jobAdvertService.closeJobAdvert(jobAdvert);
+	}
+	
+	@GetMapping("/sortedByDeadline")
+	public DataResult<List<JobAdvertDetailsDto>> getJobAdvertDetailsSortedByDeadline(){
+		return this.jobAdvertService.getJobAdvertDetailsSortedByDeadline();
 	}
 }

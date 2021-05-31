@@ -1,6 +1,7 @@
 package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -14,6 +15,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertDao;
 import kodlamaio.hrms.entities.concretes.JobAdvert;
+import kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto;
 
 @Service
 public class JobAdvertManager implements JobAdvertService{
@@ -31,13 +33,6 @@ public class JobAdvertManager implements JobAdvertService{
 	}
 
 	@Override
-	public DataResult<List<JobAdvert>> sortByAdvertDate() {
-		Sort sort = Sort.by(Direction.DESC, "deadline");
-		
-		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll(sort), "Tarihe göre listelendi");
-	}
-
-	@Override
 	public DataResult<List<JobAdvert>> getByEmployerId(int employerId) {
 		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByEmployer_EmployerId(employerId));
 	}
@@ -45,9 +40,28 @@ public class JobAdvertManager implements JobAdvertService{
 	@Override
 	public Result closeJobAdvert(JobAdvert jobAdvert) {
 		
-		this.jobAdvertDao.delete(jobAdvert);
+		JobAdvert jobAdvertFromDb = this.jobAdvertDao.getOne(jobAdvert.getAdvertId());
+		
+		//jobAdvertFromDb.setActive(false);
 		
 		return new SuccessResult("İlan Kapatıldı");
+	}
+
+	@Override
+	public DataResult<List<JobAdvertDetailsDto>> getJobAdvertDetailsDtos() {
+		
+		return new SuccessDataResult<List<JobAdvertDetailsDto>>(this.jobAdvertDao.getJobAdvertDetailsDtos(),"Details Listelendi");
+	}
+
+	@Override
+	public DataResult<List<JobAdvertDetailsDto>> getJobAdvertDetailsDtosByEmployerId(int employerId) {
+		return new SuccessDataResult<List<JobAdvertDetailsDto>>(this.jobAdvertDao.getJobAdvertDetailsByEmployerId(employerId));
+	}
+
+	@Override
+	public DataResult<List<JobAdvertDetailsDto>> getJobAdvertDetailsSortedByDeadline() {
+		
+		return new SuccessDataResult<List<JobAdvertDetailsDto>>(this.jobAdvertDao.getJobAdvertDetailsSortedByDeadline(), "Tarihe göre listelendi");
 	}
 
 	

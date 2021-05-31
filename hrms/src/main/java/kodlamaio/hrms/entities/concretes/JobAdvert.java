@@ -46,8 +46,14 @@ public class JobAdvert {
 	@Column(name="min_salary")
 	private int minSalary;
 	
+	@Column(name="is_active")
+	private boolean isActive;
+	
 	@Column(name="count_of_job")
 	private int countOfJob;
+	
+	@Column(name="published_date")
+	private Date publishedDate;
 	
 	@Column(name="deadline")
 	private Date deadline;
