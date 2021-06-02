@@ -34,4 +34,10 @@ public class ResumeManager implements ResumeService{
 		
 		return new SuccessDataResult<List<Resume>>(this.resumeDao.findAll());
 	}
+
+	@Override
+	public DataResult<Resume> getResumeByJobSeekerId(int jobSeekerId) {
+		
+		return new SuccessDataResult<Resume>(this.resumeDao.getResumeByJobSeekerId(jobSeekerId));
+	}
 }
