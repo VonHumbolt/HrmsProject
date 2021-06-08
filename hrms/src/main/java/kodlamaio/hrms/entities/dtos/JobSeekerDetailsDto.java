@@ -7,21 +7,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data 
-@NoArgsConstructor
+@NoArgsConstructor 
 @AllArgsConstructor 
-public class JobAdvertDetailsDto {
+public class JobSeekerDetailsDto {
 	
 	private int id;
 	
-	private String companyName;
-	
 	private String jobPositionName;
 	
-	private int countOfJob;
+	private String firstName;
 	
-	private String cityName;
+	private String lastName;
 	
-	private Date publishedDate;
+	private String nationalIdentity;
 	
-	private Date deadline;
+	private Date dateOfBorn;
+		
+	
 }

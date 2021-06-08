@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,14 +29,17 @@ public class JobAdvert {
 	
 	@ManyToOne()
 	@JoinColumn(name="employer_id")
+	@JsonIgnore()
 	private Employer employer;
 	
 	@ManyToOne()
 	@JoinColumn(name="job_position_id")
+	@JsonIgnore()
 	private JobPosition jobPosition;
 	
 	@ManyToOne()
 	@JoinColumn(name="city_id")
+	@JsonIgnore()
 	private City city;
 	
 	@Column(name="job_description")

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,9 +17,11 @@ import kodlamaio.hrms.business.abstracts.JobSeekerService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
+import kodlamaio.hrms.entities.dtos.JobSeekerDetailsDto;
 
 @RestController
 @RequestMapping("/api/jobSeekers")
+@CrossOrigin
 public class JobSeekersController {
 
 	private JobSeekerService jobSeekerService;
@@ -32,6 +35,11 @@ public class JobSeekersController {
 	@GetMapping("/getall")
 	public DataResult<List<JobSeeker>> getAll() {
 		return this.jobSeekerService.getAll();
+	}
+	
+	@GetMapping("/getAllJobSeekerDtos")
+	public DataResult<List<JobSeekerDetailsDto>> getJobSeekerDetailsDtos() {
+		return this.jobSeekerService.getJobSeekerDetailsDtos();
 	}
 	
 	@PostMapping("/add")

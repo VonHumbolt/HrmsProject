@@ -18,6 +18,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobSeekerDao;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
+import kodlamaio.hrms.entities.dtos.JobSeekerDetailsDto;
 
 @Service
 public class JobSeekerManager  implements JobSeekerService{
@@ -73,6 +74,13 @@ public class JobSeekerManager  implements JobSeekerService{
 		Map map = this.imageService.uploadImage(file).getData();
 		
 		return new SuccessDataResult<Map>(map,"Resim eklendi");
+	}
+
+
+	@Override
+	public DataResult<List<JobSeekerDetailsDto>> getJobSeekerDetailsDtos() {
+		
+		return new SuccessDataResult<List<JobSeekerDetailsDto>>(this.jobSeekerDao.getJobSeekerDetailsDtos());
 	}
 	
 	

@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
+import kodlamaio.hrms.entities.dtos.JobSeekerDetailsDto;
 
 public interface JobSeekerService {
 	
@@ -16,4 +17,6 @@ public interface JobSeekerService {
 	DataResult<List<JobSeeker>> getAll();
 	
 	DataResult<Map> uploadImage(MultipartFile file);
+	
+	DataResult<List<JobSeekerDetailsDto>> getJobSeekerDetailsDtos();
 }

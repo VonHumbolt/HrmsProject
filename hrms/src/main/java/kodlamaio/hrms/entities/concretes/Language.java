@@ -1,6 +1,9 @@
 package kodlamaio.hrms.entities.concretes;
 
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,6 +27,7 @@ public class Language {
 	
 	@ManyToOne()
 	@JoinColumn(name="resume_id")
+	@JsonIgnore()
 	private Resume resume;
 	
 	@Column(name="language_name")

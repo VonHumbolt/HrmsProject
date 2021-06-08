@@ -34,8 +34,10 @@ public class JobSeeker {
 	@Column(name="user_id")
 	private int userId;
 	
-	@Column(name="job_position_id")
-	private int jobPositionId;
+	@ManyToOne()
+	@JoinColumn(name="job_position_id")
+	@JsonIgnore
+	private JobPosition jobPosition;
 	
 	@Column(name="first_name")
 	private String firstName;
