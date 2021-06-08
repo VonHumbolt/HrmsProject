@@ -35,4 +35,6 @@ public class Language {
 	
 	@Column(name="language_level")
 	private int languageLevel;
+	
+	private int id;
 }
