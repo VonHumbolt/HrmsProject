@@ -19,4 +19,6 @@ public interface JobSeekerService {
 	DataResult<Map> uploadImage(MultipartFile file);
 	
 	DataResult<List<JobSeekerDetailsDto>> getJobSeekerDetailsDtos();
+	
+	DataResult<JobSeekerDetailsDto> getJobSeekerDetailDtoByJobSeekerId(int jobSeekerId);
 }

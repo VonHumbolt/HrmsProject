@@ -21,6 +21,12 @@ public class JobAdvertDetailsDto {
 	
 	private String cityName;
 	
+	private int minSalary;
+	
+	private int maxSalary;
+	
+	private String jobDescription;
+	
 	private Date publishedDate;
 	
 	private Date deadline;

@@ -82,6 +82,13 @@ public class JobSeekerManager  implements JobSeekerService{
 		
 		return new SuccessDataResult<List<JobSeekerDetailsDto>>(this.jobSeekerDao.getJobSeekerDetailsDtos());
 	}
+
+
+	@Override
+	public DataResult<JobSeekerDetailsDto> getJobSeekerDetailDtoByJobSeekerId(int jobSeekerId) {
+		
+		return new SuccessDataResult<JobSeekerDetailsDto>(this.jobSeekerDao.getJobSeekerDetailDtoByJobSeekerId(jobSeekerId));
+	}
 	
 	
 

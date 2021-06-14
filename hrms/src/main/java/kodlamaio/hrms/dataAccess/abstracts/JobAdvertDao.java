@@ -12,15 +12,23 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer>  {
 	
 	List<JobAdvert> getByEmployer_EmployerId(int employerId);
 	
-	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto(j.id, e.companyName, jb.jobPositionName, j.countOfJob, c.cityName, j.publishedDate, j.deadline)" + 
+	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto(j.id, e.companyName, jb.jobPositionName, j.countOfJob, c.cityName, j.minSalary, j.maxSalary,"
+			+ " j.jobDescription, j.publishedDate, j.deadline)" + 
+			"From JobAdvert j Inner Join j.employer e Inner Join j.city c Inner Join j.jobPosition jb where j.isActive=true and j.advertId=:advertId")
+	JobAdvertDetailsDto getJobAdvertDtoByAdvertId(int advertId);
+	
+	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto(j.id, e.companyName, jb.jobPositionName, j.countOfJob, c.cityName, j.minSalary, j.maxSalary,"
+			+ " j.jobDescription, j.publishedDate, j.deadline)" + 
 			"From JobAdvert j Inner Join j.employer e Inner Join j.city c Inner Join j.jobPosition jb where j.isActive=true")
 	List<JobAdvertDetailsDto> getJobAdvertDetailsDtos();
 	
-	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto(j.id, e.companyName, jb.jobPositionName, j.countOfJob, c.cityName, j.publishedDate, j.deadline)" + 
+	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto(j.id, e.companyName, jb.jobPositionName, j.countOfJob, c.cityName,  j.minSalary, j.maxSalary, "
+			+ "j.jobDescription,j.publishedDate, j.deadline)" + 
 			"From JobAdvert j Inner Join j.jobPosition jb Inner Join j.city c Inner Join j.employer e where e.employerId=:employerId and j.isActive=true")
 	List<JobAdvertDetailsDto> getJobAdvertDetailsByEmployerId(int employerId);
 	
-	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto(j.id, e.companyName, jb.jobPositionName, j.countOfJob, c.cityName, j.publishedDate, j.deadline)" + 
+	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto(j.id, e.companyName, jb.jobPositionName, j.countOfJob, c.cityName,  j.minSalary, j.maxSalary," +
+			"j.jobDescription, j.publishedDate, j.deadline)" + 
 			"From JobAdvert j Inner Join j.jobPosition jb Inner Join j.city c Inner Join j.employer e Order By j.deadline DESC")
 	List<JobAdvertDetailsDto> getJobAdvertDetailsSortedByDeadline();
 }

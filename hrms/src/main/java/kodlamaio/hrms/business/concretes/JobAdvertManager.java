@@ -64,5 +64,19 @@ public class JobAdvertManager implements JobAdvertService{
 		return new SuccessDataResult<List<JobAdvertDetailsDto>>(this.jobAdvertDao.getJobAdvertDetailsSortedByDeadline(), "Tarihe göre listelendi");
 	}
 
+	@Override
+	public Result add(JobAdvert jobAdvert) {
+		
+		this.jobAdvertDao.save(jobAdvert);
+		
+		return new SuccessResult("İş İlani Oluşturuldu!");
+	}
+
+	@Override
+	public DataResult<JobAdvertDetailsDto> getJobAdvertDtoByAdvertId(int advertId) {
+		
+		return new SuccessDataResult<JobAdvertDetailsDto>(this.jobAdvertDao.getJobAdvertDtoByAdvertId(advertId)); 
+	}
+
 	
 }

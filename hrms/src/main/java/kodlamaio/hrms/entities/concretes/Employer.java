@@ -9,7 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,12 +34,23 @@ public class Employer {
 	private int userId;
 	
 	@Column(name="company_name")
+	@NotNull
+	@NotBlank
 	private String companyName;
 	
 	@Column(name="web_site")
+	@NotNull
+	@NotBlank
 	private String webSite;
 	
+	@Column(name="email")
+	@NotNull
+	@NotBlank
+	private String email;
+	
 	@Column(name="phone_number")
+	@NotNull
+	@NotBlank 
 	private String phoneNumber;
 	
 	@Column(name="email_vertification")
@@ -46,5 +60,6 @@ public class Employer {
 	private boolean hrmsVertification;
 	
 	@OneToMany(mappedBy = "employer")
+	@JsonIgnore
 	private List<JobAdvert> jobAdverts;
 }

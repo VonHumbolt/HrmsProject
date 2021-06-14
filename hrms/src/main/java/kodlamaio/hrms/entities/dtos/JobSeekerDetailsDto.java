@@ -22,6 +22,5 @@ public class JobSeekerDetailsDto {
 	private String nationalIdentity;
 	
 	private Date dateOfBorn;
-		
 	
 }

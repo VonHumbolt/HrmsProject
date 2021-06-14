@@ -15,4 +15,8 @@ public interface JobSeekerDao extends JpaRepository<JobSeeker , Integer>{
 	@Query("Select new kodlamaio.hrms.entities.dtos.JobSeekerDetailsDto(j.jobSeekerId, jp.jobPositionName, j.firstName, j.lastName, j.nationalIdentity, j.dateOfBorn)" + 
 			"From JobSeeker j Inner Join j.jobPosition jp")
 	List<JobSeekerDetailsDto> getJobSeekerDetailsDtos();
+	
+	@Query("Select new kodlamaio.hrms.entities.dtos.JobSeekerDetailsDto(j.jobSeekerId, jp.jobPositionName, j.firstName, j.lastName, j.nationalIdentity, j.dateOfBorn)" + 
+			"From JobSeeker j Inner Join j.jobPosition jp where j.jobSeekerId=:jobSeekerId")
+	JobSeekerDetailsDto getJobSeekerDetailDtoByJobSeekerId(int jobSeekerId);
 }
