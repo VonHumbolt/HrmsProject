@@ -32,14 +32,24 @@ public class JobAdvertsController {
 		return this.jobAdvertService.getAll();
 	}
 	
+	@GetMapping("/getAllByPage")
+	public DataResult<List<JobAdvert>> getAll(int pageNo, int pageSize) {
+		return this.jobAdvertService.getAll(pageNo, pageSize);
+	}
+	
 	@GetMapping("/getJobAdvertDtoByAdvertId")
-	public DataResult<JobAdvertDetailsDto> getJobAdvertDtoByAdvertId(int advertId) {
+	public DataResult<JobAdvertDetailsDto> getJobAdvertDtoByAdvertId(@RequestParam int advertId) {
 		return this.jobAdvertService.getJobAdvertDtoByAdvertId(advertId);
 	}
 	
 	@GetMapping("/getJobAdvertDetails")
 	public DataResult<List<JobAdvertDetailsDto>> getJobAdvertDetailsDtos(){
 		return this.jobAdvertService.getJobAdvertDetailsDtos();
+	}
+	
+	@GetMapping("/getPassiveJobAdvertDetails")
+	public DataResult<List<JobAdvertDetailsDto>> getPassiveJobAdvertDetailsDtos() {
+		return this.jobAdvertService.getPassiveJobAdvertDetailsDtos();
 	}
 	
 	@GetMapping("/getByEmployerId")
@@ -56,6 +66,11 @@ public class JobAdvertsController {
 	@PostMapping("/closeJobAdvert")
 	public Result closeJobAdvert(@RequestBody JobAdvert jobAdvert) {
 		return this.jobAdvertService.closeJobAdvert(jobAdvert);
+	}
+	
+	@PostMapping("/approveJobAdvert")
+	public Result approveJobAdvert(@RequestBody JobAdvert jobAdvert) {
+		return this.jobAdvertService.approveJobAdvert(jobAdvert);
 	}
 	
 	@PostMapping("/add")

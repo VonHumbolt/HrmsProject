@@ -1,11 +1,10 @@
 package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobAdvertService;
@@ -33,6 +32,14 @@ public class JobAdvertManager implements JobAdvertService{
 	}
 
 	@Override
+	public DataResult<List<JobAdvert>> getAll(int pageNo, int pageSize) {
+		
+		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
+		
+		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll(pageable).getContent());
+	}
+	
+	@Override
 	public DataResult<List<JobAdvert>> getByEmployerId(int employerId) {
 		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByEmployer_EmployerId(employerId));
 	}
@@ -42,7 +49,8 @@ public class JobAdvertManager implements JobAdvertService{
 		
 		JobAdvert jobAdvertFromDb = this.jobAdvertDao.getOne(jobAdvert.getAdvertId());
 		
-		//jobAdvertFromDb.setActive(false);
+		jobAdvertFromDb.setActive(false);
+		this.jobAdvertDao.save(jobAdvertFromDb);
 		
 		return new SuccessResult("İlan Kapatıldı");
 	}
@@ -76,6 +84,25 @@ public class JobAdvertManager implements JobAdvertService{
 	public DataResult<JobAdvertDetailsDto> getJobAdvertDtoByAdvertId(int advertId) {
 		
 		return new SuccessDataResult<JobAdvertDetailsDto>(this.jobAdvertDao.getJobAdvertDtoByAdvertId(advertId)); 
+	}
+
+	@Override
+	public DataResult<List<JobAdvertDetailsDto>> getPassiveJobAdvertDetailsDtos() {
+		
+		return new SuccessDataResult<List<JobAdvertDetailsDto>>(this.jobAdvertDao.getPassiveJobAdvertDetailsDtos());
+	}
+
+	@Override
+	public Result approveJobAdvert(JobAdvert jobAdvert) {
+		
+		JobAdvert jobAdvertFromDb = this.jobAdvertDao.getOne(jobAdvert.getAdvertId());
+		
+		jobAdvertFromDb.setActive(true);
+		
+		this.jobAdvertDao.save(jobAdvertFromDb);
+		
+		return new SuccessResult("İlan Onaylandı");
+		
 	}
 
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -21,6 +22,7 @@ import lombok.NoArgsConstructor;
 public class Resume {
 
 	@Id
+	@GeneratedValue
 	@Column(name="resume_id")
 	private int resumeId;
 
@@ -38,6 +40,9 @@ public class Resume {
 	
 	@OneToMany(mappedBy = "resume")
 	private List<Ability> abilities;
+	
+	@OneToOne(mappedBy = "resume")
+	private UserImage userImage;
 	
 	@Column(name="github_address")
 	private String githubAddress;

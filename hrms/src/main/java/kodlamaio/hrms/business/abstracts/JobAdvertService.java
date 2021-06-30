@@ -11,15 +11,21 @@ public interface JobAdvertService {
 	
 	DataResult<List<JobAdvert>> getAll();
 	
+	DataResult<List<JobAdvert>> getAll(int pageNo, int pageSize);
+	
 	DataResult<JobAdvertDetailsDto> getJobAdvertDtoByAdvertId(int advertId);
 	
 	DataResult<List<JobAdvert>> getByEmployerId(int employerId);
 	
 	Result closeJobAdvert(JobAdvert jobAdvert);
 	
+	Result approveJobAdvert(JobAdvert jobAdvert);
+	
 	Result add(JobAdvert jobAdvert);
 	
 	DataResult<List<JobAdvertDetailsDto>> getJobAdvertDetailsDtos();
+	
+	DataResult<List<JobAdvertDetailsDto>> getPassiveJobAdvertDetailsDtos();
 	
 	DataResult<List<JobAdvertDetailsDto>> getJobAdvertDetailsDtosByEmployerId(int employerId);
 	

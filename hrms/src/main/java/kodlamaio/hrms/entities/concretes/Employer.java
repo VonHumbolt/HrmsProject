@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -30,8 +32,9 @@ public class Employer {
 	@Column(name="employer_id")
 	private int employerId;
 	
-	@Column(name="user_id")
-	private int userId;
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	@Column(name="company_name")
 	@NotNull
@@ -43,15 +46,13 @@ public class Employer {
 	@NotBlank
 	private String webSite;
 	
-	@Column(name="email")
-	@NotNull
-	@NotBlank
-	private String email;
-	
 	@Column(name="phone_number")
 	@NotNull
 	@NotBlank 
 	private String phoneNumber;
+	
+	@Column(name="is_update_confirmed")
+	private boolean isUpdateConfirmed = true;
 	
 	@Column(name="email_vertification")
 	private boolean emailVertification;

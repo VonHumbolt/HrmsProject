@@ -5,11 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,25 +13,29 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="system_personnels")
+@Table(name="employer_for_update")
 @NoArgsConstructor
 @AllArgsConstructor
-public class SystemPersonnel{
-
-	@Id
+public class EmployerForUpdate {
+	
+	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="system_personnel_id")
-	private int systemPersonnelId;
+	@Column(name= "updatedEmployerId")
+	private int updatedEmployerId;
 	
-	@Column(name="first_name")
-	private String firstName;
+	@Column(name="employer_id")
+	private int employerId;
 	
-	@Column(name="last_name")
-	private String lastName;
-
-	@OneToOne
-	@JoinColumn(name="user_id")
-	@JsonIgnore
-	private User user;
+	@Column(name= "new_company_name")
+	private String newCompanyName;
+	
+	@Column(name= "new_web_site")
+	private String newWebSite;
+	
+	@Column(name="new_phone_number")
+	private String newPhoneNumber;
+	
+	@Column(name="new_email")
+	private String newEmail;
 	
 }

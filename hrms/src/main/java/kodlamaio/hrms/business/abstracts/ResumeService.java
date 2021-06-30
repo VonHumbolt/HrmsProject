@@ -13,4 +13,6 @@ public interface ResumeService {
 	DataResult<List<Resume>> getAll();
 
 	DataResult<Resume> getResumeByJobSeekerId(int jobSeekerId);
+	
+	DataResult<Resume> getResumeByResumeId(int resumeId);
 }

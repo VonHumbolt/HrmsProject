@@ -61,11 +61,6 @@ public class JobSeekersController {
 		return this.jobSeekerService.add(jobSeeker);
 	}
 	
-	@PostMapping("/uploadImage")
-	public DataResult<Map> uploadImage(@RequestParam MultipartFile file) {
-		return this.jobSeekerService.uploadImage(file);
-	}
-	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ErrorDataResult<Object> handleValidationErrors(MethodArgumentNotValidException exceptions) {

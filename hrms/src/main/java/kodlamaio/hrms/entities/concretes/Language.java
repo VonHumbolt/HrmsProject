@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,12 +23,13 @@ import lombok.NoArgsConstructor;
 public class Language {
 
 	@Id 
+	@GeneratedValue 
 	@Column(name="language_id")
 	private int languageId;
 	
 	@ManyToOne()
 	@JoinColumn(name="resume_id")
-	@JsonIgnore()
+	@JsonIgnore
 	private Resume resume;
 	
 	@Column(name="language_name")

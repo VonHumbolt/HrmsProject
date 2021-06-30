@@ -25,7 +25,8 @@ import lombok.NoArgsConstructor;
 @Table(name="job_seekers")
 @NoArgsConstructor 
 @AllArgsConstructor
-public class JobSeeker {
+
+public class JobSeeker{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,5 +69,8 @@ public class JobSeeker {
 	@JoinColumn(name="resume_id")
 	@JsonIgnore
 	private Resume resume;
+	
+	@OneToOne(mappedBy = "jobSeeker")
+	private UserImage userImage;
 	
 }

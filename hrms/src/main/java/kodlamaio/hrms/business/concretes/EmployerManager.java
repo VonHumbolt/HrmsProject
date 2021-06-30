@@ -14,6 +14,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
+import kodlamaio.hrms.entities.concretes.EmployerForUpdate;
 
 @Service
 public class EmployerManager implements EmployerService{
@@ -45,6 +46,41 @@ public class EmployerManager implements EmployerService{
 		
 		return new SuccessResult("Kayıt Başarılı");
 	}
+	
+	@Override
+	public Result update(EmployerForUpdate employerForUpdate) {
+		
+		Employer employerFromDb = this.employerDao.getOne(employerForUpdate.getEmployerId());
+		
+		employerFromDb.setCompanyName(employerForUpdate.getNewCompanyName());
+		employerFromDb.setWebSite(employerForUpdate.getNewWebSite());
+		employerFromDb.setPhoneNumber(employerForUpdate.getNewPhoneNumber());
+		employerFromDb.setUpdateConfirmed(true);
+		
+		this.employerDao.save(employerFromDb);
+		
+		return new SuccessResult("Kayıt başarıyla güncellendi");
+	}
+
+	@Override
+	public DataResult<Employer> getEmployerByEmployerId(int employerId) {
+		
+		return new SuccessDataResult(this.employerDao.getEmployerByEmployerId(employerId));
+
+	}
+
+	@Override
+	public Result setUpdateConfirmed(int employerId, boolean isUpdateConfirmed) {
+		
+		Employer employerForDb = this.employerDao.getOne(employerId);
+		
+		employerForDb.setUpdateConfirmed(isUpdateConfirmed);
+		this.employerDao.save(employerForDb);
+		
+		return new SuccessResult();
+	}
+
+
 
 
 }

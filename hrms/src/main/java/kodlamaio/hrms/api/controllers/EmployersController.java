@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,7 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Employer;
+import kodlamaio.hrms.entities.concretes.EmployerForUpdate;
 
 @RestController
 @RequestMapping("/api/employers")
@@ -44,9 +46,24 @@ public class EmployersController {
 		return this.employerService.getAll();
 	}
 	
+	@GetMapping("/getEmployerByEmployerId")
+	public DataResult<Employer> getEmployerByEmployerId(@RequestParam int employerId) {
+		return this.employerService.getEmployerByEmployerId(employerId);
+	}
+	
 	@PostMapping("/add")
 	public Result add(@Valid @RequestBody Employer employer) {
 		return this.employerService.add(employer);
+	}
+	
+	@PostMapping("/update")
+	public Result update(@RequestBody EmployerForUpdate employerForUpdate) {
+		return this.employerService.update(employerForUpdate);
+	}
+	
+	@GetMapping("/setUpdateConfirmed")
+	public Result setUpdateConfirmed(@RequestParam int employerId, @RequestParam boolean isUpdateConfirmed) {
+		return this.employerService.setUpdateConfirmed(employerId, isUpdateConfirmed);
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)

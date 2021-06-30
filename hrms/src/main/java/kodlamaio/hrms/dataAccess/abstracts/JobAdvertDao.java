@@ -22,6 +22,11 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer>  {
 			"From JobAdvert j Inner Join j.employer e Inner Join j.city c Inner Join j.jobPosition jb where j.isActive=true")
 	List<JobAdvertDetailsDto> getJobAdvertDetailsDtos();
 	
+	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto(j.id, e.companyName, jb.jobPositionName, j.countOfJob, c.cityName, j.minSalary, j.maxSalary,"
+			+ " j.jobDescription, j.publishedDate, j.deadline)" + 
+			"From JobAdvert j Inner Join j.employer e Inner Join j.city c Inner Join j.jobPosition jb where j.isActive=false")
+	List<JobAdvertDetailsDto> getPassiveJobAdvertDetailsDtos();
+	
 	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto(j.id, e.companyName, jb.jobPositionName, j.countOfJob, c.cityName,  j.minSalary, j.maxSalary, "
 			+ "j.jobDescription,j.publishedDate, j.deadline)" + 
 			"From JobAdvert j Inner Join j.jobPosition jb Inner Join j.city c Inner Join j.employer e where e.employerId=:employerId and j.isActive=true")

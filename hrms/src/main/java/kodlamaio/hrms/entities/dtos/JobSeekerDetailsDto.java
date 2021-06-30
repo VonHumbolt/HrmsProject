@@ -23,4 +23,5 @@ public class JobSeekerDetailsDto {
 	
 	private Date dateOfBorn;
 	
+	private String imageUrl;
 }

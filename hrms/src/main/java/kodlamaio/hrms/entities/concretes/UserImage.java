@@ -3,7 +3,6 @@ package kodlamaio.hrms.entities.concretes;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -15,27 +14,28 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@Entity
-@Table(name="system_personnels")
+@Data 
 @NoArgsConstructor
-@AllArgsConstructor
-public class SystemPersonnel{
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="system_personnel_id")
-	private int systemPersonnelId;
+@AllArgsConstructor 
+@Entity
+@Table(name="user_images")
+public class UserImage {
 	
-	@Column(name="first_name")
-	private String firstName;
+	@Id 
+	@GeneratedValue
+	@Column(name="image_id")
+	private int userImageId;
 	
-	@Column(name="last_name")
-	private String lastName;
-
+	@JoinColumn(name="job_seeker_id")
 	@OneToOne
-	@JoinColumn(name="user_id")
 	@JsonIgnore
-	private User user;
+	private JobSeeker jobSeeker;
 	
+	@Column(name="image_url")
+	private String imageUrl;
+	
+	@OneToOne
+	@JoinColumn(name="resume_id")
+	@JsonIgnore
+	private Resume resume;
 }

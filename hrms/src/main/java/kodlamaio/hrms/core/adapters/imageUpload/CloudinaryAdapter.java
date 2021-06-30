@@ -1,10 +1,8 @@
 package kodlamaio.hrms.core.adapters.imageUpload;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 
 import kodlamaio.hrms.core.abstracts.ImageUploadService;
@@ -38,6 +37,7 @@ public class CloudinaryAdapter implements ImageUploadService{
 	public DataResult<Map> uploadImage(MultipartFile multipartFile){
 		
 		Map result = null;
+
 		try {
 			File file = convert(multipartFile);
 			result = this.cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
@@ -51,7 +51,7 @@ public class CloudinaryAdapter implements ImageUploadService{
 	
 		
 	}
-
+	
 	
 	private File convert(MultipartFile multipartFile) throws IOException {
 		File file = new File(multipartFile.getOriginalFilename());
