@@ -60,4 +60,13 @@ public class JobAdvert {
 	@Column(name="deadline")
 	private Date deadline;
 	
+	@ManyToOne()
+	@JoinColumn(name="job_type_id")
+	private JobType jobType;
+	
+	@ManyToOne()
+	@JoinColumn(name="work_place_id")
+	private WorkPlace workPlace;
+	
+	
 }

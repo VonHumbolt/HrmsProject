@@ -33,10 +33,15 @@ public class JobAdvertsController {
 	}
 	
 	@GetMapping("/getAllByPage")
-	public DataResult<List<JobAdvert>> getAll(int pageNo, int pageSize) {
+	public DataResult<List<JobAdvert>> getAll(@RequestParam int pageNo, @RequestParam int pageSize) {
 		return this.jobAdvertService.getAll(pageNo, pageSize);
 	}
 	
+	@GetMapping("/getByAdvertId")
+	public DataResult<JobAdvert> getByAdvertId(@RequestParam int advertId) {
+		return this.jobAdvertService.getByAdvertId(advertId);
+	}
+		
 	@GetMapping("/getJobAdvertDtoByAdvertId")
 	public DataResult<JobAdvertDetailsDto> getJobAdvertDtoByAdvertId(@RequestParam int advertId) {
 		return this.jobAdvertService.getJobAdvertDtoByAdvertId(advertId);

@@ -13,6 +13,8 @@ public interface JobAdvertService {
 	
 	DataResult<List<JobAdvert>> getAll(int pageNo, int pageSize);
 	
+	DataResult<JobAdvert> getByAdvertId(int advertId);
+	
 	DataResult<JobAdvertDetailsDto> getJobAdvertDtoByAdvertId(int advertId);
 	
 	DataResult<List<JobAdvert>> getByEmployerId(int employerId);

@@ -38,6 +38,12 @@ public class JobAdvertManager implements JobAdvertService{
 		
 		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll(pageable).getContent());
 	}
+
+	@Override
+	public DataResult<JobAdvert> getByAdvertId(int advertId) {
+		
+		return new SuccessDataResult<JobAdvert>(this.jobAdvertDao.getByAdvertId(advertId));
+	}
 	
 	@Override
 	public DataResult<List<JobAdvert>> getByEmployerId(int employerId) {
@@ -104,6 +110,7 @@ public class JobAdvertManager implements JobAdvertService{
 		return new SuccessResult("İlan Onaylandı");
 		
 	}
+
 
 	
 }
