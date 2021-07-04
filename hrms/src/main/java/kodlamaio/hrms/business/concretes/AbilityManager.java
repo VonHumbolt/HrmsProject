@@ -37,4 +37,24 @@ public class AbilityManager implements AbilityService{
 		return new SuccessDataResult<List<Ability>>(this.abilityDao.findAll());
 	}
 
+	@Override
+	public Result update(Ability ability) {
+		
+		Ability abilityFromDb = this.abilityDao.getOne(ability.getAbilityId());
+		
+		abilityFromDb.setTechnology(ability.getTechnology());
+		
+		this.abilityDao.save(abilityFromDb);
+		
+		return new SuccessResult("Güncellendi");
+	}
+
+	@Override
+	public Result delete(Ability ability) {
+		
+		this.abilityDao.delete(ability);
+		
+		return new SuccessResult("Silme işlemi başarılı");
+	}
+
 }

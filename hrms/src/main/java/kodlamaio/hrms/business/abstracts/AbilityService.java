@@ -10,5 +10,9 @@ public interface AbilityService {
 	
 	Result add(Ability ability);
 	
+	Result update(Ability ability);
+	
+	Result delete(Ability ability);
+	
 	DataResult<List<Ability>> getAll();
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.SystemPersonnelService;
@@ -31,8 +32,21 @@ public class SystemPersonnelsController {
 		return this.systemPersonnelService.getAll();
 	}
 	
+	@GetMapping("/getBySystemPersonnelId")
+	public DataResult<SystemPersonnel> getBySystemPersonnelId(@RequestParam int systemPersonnelId) {
+		return this.systemPersonnelService.getBySystemPersonnelId(systemPersonnelId);
+	}
+	
+	
 	@PostMapping("/add")
 	public Result add(@RequestBody SystemPersonnel systemPersonnel) {
 		return this.systemPersonnelService.add(systemPersonnel);
 	}
+	
+	@PostMapping("/update")
+	public Result update(@RequestBody SystemPersonnel systemPersonnel) {
+		return this.systemPersonnelService.update(systemPersonnel);
+	}
+		
+	
 }

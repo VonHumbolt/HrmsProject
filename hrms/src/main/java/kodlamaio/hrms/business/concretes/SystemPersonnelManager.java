@@ -30,7 +30,13 @@ public class SystemPersonnelManager implements SystemPersonnelService{
 		return new SuccessDataResult<List<SystemPersonnel>>(this.systemPersonelDao.findAll()); 
 	}
 
-
+	@Override
+	public DataResult<SystemPersonnel> getBySystemPersonnelId(int systemPersonnelId) {
+		
+		return new SuccessDataResult<SystemPersonnel>(this.systemPersonelDao.getOne(systemPersonnelId));
+	}
+	
+	
 	@Override
 	public Result add(SystemPersonnel systemPersonnel) {
 		 
@@ -38,5 +44,17 @@ public class SystemPersonnelManager implements SystemPersonnelService{
 		
 		return new SuccessResult("Kayıt başarılı");
 	}
+
+	@Override
+	public Result update(SystemPersonnel systemPersonnel) {
+		
+		SystemPersonnel systemPersonnelFromDb = this.systemPersonelDao.getOne(systemPersonnel.getSystemPersonnelId());
+		
+		systemPersonnelFromDb.setFirstName(systemPersonnel.getFirstName());
+		systemPersonnelFromDb.setLastName(systemPersonnel.getLastName());
+		
+		return new SuccessResult("Güncellendi");
+	}
+
 
 }
