@@ -10,6 +10,10 @@ public interface ResumeService {
 	
 	Result add(Resume resume);
 	
+	Result update(Resume resume);
+	
+	Result delete(Resume resume);
+	
 	DataResult<List<Resume>> getAll();
 
 	DataResult<Resume> getResumeByJobSeekerId(int jobSeekerId);

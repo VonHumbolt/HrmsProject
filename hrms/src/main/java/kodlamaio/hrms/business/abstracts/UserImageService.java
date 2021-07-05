@@ -13,4 +13,6 @@ public interface UserImageService {
 	DataResult<UserImage> getUserImageByJobSeekerId(int jobSeekerId);
 	
 	Result add(int jobSeekerId ,int resumeId, MultipartFile multipartFile);
+	
+	Result update(int userImageId, MultipartFile multipartFile);
 }

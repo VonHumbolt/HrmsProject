@@ -30,6 +30,26 @@ public class ResumeManager implements ResumeService{
 	}
 
 	@Override
+	public Result update(Resume resume) {
+		Resume resumeFromDb = this.resumeDao.getOne(resume.getResumeId());
+		
+		resumeFromDb.setGithubAddress(resume.getGithubAddress());
+		resumeFromDb.setLinkedinAdress(resume.getLinkedinAdress());
+		resumeFromDb.setCoverLetter(resume.getCoverLetter());
+		
+		this.resumeDao.save(resumeFromDb);
+		
+		return new SuccessResult("Cv Güncellendi");
+	}
+
+	@Override
+	public Result delete(Resume resume) {
+		this.resumeDao.delete(resume);
+		
+		return new SuccessResult("Cv Silindi");
+	}
+	
+	@Override
 	public DataResult<List<Resume>> getAll() {
 		
 		return new SuccessDataResult<List<Resume>>(this.resumeDao.findAll());
@@ -46,4 +66,5 @@ public class ResumeManager implements ResumeService{
 		
 		return new SuccessDataResult<Resume>(this.resumeDao.getResumeByResumeId(resumeId));
 	}
+
 }

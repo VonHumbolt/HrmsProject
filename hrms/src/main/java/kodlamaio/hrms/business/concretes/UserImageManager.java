@@ -61,5 +61,20 @@ public class UserImageManager implements UserImageService{
 		
 	}
 
+	@Override
+	public Result update(int userImageId, MultipartFile multipartFile) {
+		
+		var uploadedImage = this.imageUploadService.uploadImage(multipartFile);
+		var imageUrl = (String) uploadedImage.getData().get("url");
+		
+		UserImage userImageFromDb = this.userImageDao.getOne(userImageId);
+		
+		userImageFromDb.setImageUrl(imageUrl);
+		
+		this.userImageDao.save(userImageFromDb);
+		
+		return new SuccessResult("Resim Güncellendi");
+	}
+
 	
 }

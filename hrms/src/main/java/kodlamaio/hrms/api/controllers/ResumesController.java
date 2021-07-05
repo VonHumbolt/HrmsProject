@@ -47,4 +47,14 @@ public class ResumesController {
 	public Result add(@RequestBody Resume resume) {
 		return this.resumeService.add(resume);
 	}
+	
+	@PostMapping("/update")
+	public Result update(@RequestBody Resume resume) {
+		return this.resumeService.update(resume);
+	}
+	
+	@PostMapping("/delete")
+	public Result delete(@RequestBody Resume resume) {
+		return this.resumeService.delete(resume);
+	}
 }
