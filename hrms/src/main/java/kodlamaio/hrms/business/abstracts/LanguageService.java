@@ -10,5 +10,7 @@ public interface LanguageService {
 
 	Result add(Language language);
 	
+	Result update(Language language);
+	
 	DataResult<List<Language>> getAll();
 }
