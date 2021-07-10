@@ -1,5 +1,7 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +31,12 @@ public class FavoriteJobAdvert {
 	@Column(name="job_advert_id")
 	private int advertId;
 	
-	@Column(name="job_position_name")
-	private String jobPositionName;
+	@Column(name="job_description")
+	private String jobDescription;
+	
+	@Column(name="deadline")
+	private Date deadline;
+	
+	
 	
 }

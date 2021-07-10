@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -52,4 +53,7 @@ public class Resume {
 	
 	@Column(name="cover_letter")
 	private String coverLetter;
+
+	@Column(name="job_seeker_id")
+	private int jobSeekerId;
 }
