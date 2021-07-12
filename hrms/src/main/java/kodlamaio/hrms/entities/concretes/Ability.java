@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 @Data  
 @Entity 
-@Table(name="ability")
+@Table(name="abilities")
 @NoArgsConstructor 
 @AllArgsConstructor 
 public class Ability {
