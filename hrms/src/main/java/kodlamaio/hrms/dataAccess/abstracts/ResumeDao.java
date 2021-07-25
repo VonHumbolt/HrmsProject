@@ -7,10 +7,11 @@ import kodlamaio.hrms.entities.concretes.Resume;
 
 public interface ResumeDao extends JpaRepository<Resume , Integer>{
 
-	@Query("From Resume r where r.jobSeeker.jobSeekerId=:jobSeekerId")
+	@Query("From Resume r where r.jobSeeker.userId=:jobSeekerId")
 	Resume getResumeByJobSeekerId(int jobSeekerId);
 	
 	@Query("From Resume r where r.resumeId=:resumeId")
 	Resume getResumeByResumeId(int resumeId);
 	
 }
+

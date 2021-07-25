@@ -10,7 +10,7 @@ public interface SystemPersonnelService {
 	
 	DataResult<List<SystemPersonnel>> getAll();
 	
-	DataResult<SystemPersonnel> getBySystemPersonnelId(int systemPersonnelId);
+	DataResult<SystemPersonnel> getByUserId(int systemPersonnelId);
 	
 	Result add(SystemPersonnel systemPersonnel);
 	

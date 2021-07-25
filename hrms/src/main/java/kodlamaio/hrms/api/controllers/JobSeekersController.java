@@ -27,6 +27,7 @@ import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
 import kodlamaio.hrms.entities.dtos.JobSeekerDetailsDto;
+import kodlamaio.hrms.entities.dtos.JobSeekerForRegister;
 
 @RestController
 @RequestMapping("/api/jobSeekers")
@@ -57,8 +58,8 @@ public class JobSeekersController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@Valid @RequestBody JobSeeker jobSeeker) {
-		return this.jobSeekerService.add(jobSeeker);
+	public Result add(@Valid @RequestBody JobSeekerForRegister jobSeekerForRegister) {
+		return this.jobSeekerService.add(jobSeekerForRegister);
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)

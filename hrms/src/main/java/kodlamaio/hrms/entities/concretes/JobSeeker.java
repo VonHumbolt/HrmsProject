@@ -4,9 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -26,15 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor 
 @AllArgsConstructor
 
-public class JobSeeker{
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="job_seeker_id")
-	private int jobSeekerId;
-	
-	@Column(name="user_id")
-	private int userId;
+public class JobSeeker extends User{
 	
 	@ManyToOne()
 	@JoinColumn(name="job_position_id")

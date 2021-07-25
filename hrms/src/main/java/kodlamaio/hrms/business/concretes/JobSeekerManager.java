@@ -16,6 +16,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobSeekerDao;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
 import kodlamaio.hrms.entities.dtos.JobSeekerDetailsDto;
+import kodlamaio.hrms.entities.dtos.JobSeekerForRegister;
 
 @Service
 public class JobSeekerManager  implements JobSeekerService{
@@ -39,26 +40,40 @@ public class JobSeekerManager  implements JobSeekerService{
 		return new SuccessDataResult<List<JobSeeker>>(this.jobSeekerDao.findAll());
 	}
 
-
 	@Override
-	public Result add(JobSeeker jobSeeker) {
+	public Result add(JobSeekerForRegister jobSeekerForRegister) {
 		
-		JobSeeker jobSeekerFromDb = this.jobSeekerDao.findByNationalIdentity(jobSeeker.getNationalIdentity());
-		
-		if(!emailService.isEmailVerified()) {
-			return new ErrorResult("Lütfen emailinize gelen doğrulama kodunu onaylayınız");
+		if(emailService.isEmailVerified()) {
 			
-		}
-		else if(!mernisService.isUserRealPerson()) {
+			if(mernisService.isUserRealPerson()) {
+				
+				if(this.jobSeekerDao.findByNationalIdentity(jobSeekerForRegister.getNationalIdentity()) == null) {
+					
+					if(this.jobSeekerDao.findByEmail(jobSeekerForRegister.getEmail()) == null) {
+						
+						JobSeeker jobSeeker = new JobSeeker();
+						
+						jobSeeker.setFirstName(jobSeekerForRegister.getFirstName());
+						jobSeeker.setLastName(jobSeekerForRegister.getLastName());
+						jobSeeker.setNationalIdentity(jobSeekerForRegister.getNationalIdentity());
+						jobSeeker.setDateOfBorn(jobSeekerForRegister.getDateOfBorn());
+						jobSeeker.setFirstName(jobSeekerForRegister.getFirstName());
+						jobSeeker.setEmail(jobSeekerForRegister.getEmail());
+						jobSeeker.setPassword(jobSeekerForRegister.getPassword());
+						
+						this.jobSeekerDao.save(jobSeeker);
+						
+						return new SuccessResult("Kullanıcı oluşturuldu");
+					}
+					return new ErrorResult("Bu Email ile bir kayıt yapılmış.");
+				}
+				return new ErrorResult("Bu kimlik numarasıyla bir kayıt yapılmış.");
+				
+			}
 			return new ErrorResult("Kimlik Bilgileri Hatalı");
 		}
-		else if(jobSeekerFromDb != null) {
-			return new ErrorResult("Bu kimlik numarasıyla bir kayıt yapılmış.");
-		}
-		
-		this.jobSeekerDao.save(jobSeeker);
-		
-		return new SuccessResult("Kayıt İşlemi tamamlandı.");
+		return new ErrorResult("Lütfen emailinize gelen doğrulama kodunu onaylayınız");
+	
 	}
 
 

@@ -31,7 +31,7 @@ public class SystemPersonnelManager implements SystemPersonnelService{
 	}
 
 	@Override
-	public DataResult<SystemPersonnel> getBySystemPersonnelId(int systemPersonnelId) {
+	public DataResult<SystemPersonnel> getByUserId(int systemPersonnelId) {
 		
 		return new SuccessDataResult<SystemPersonnel>(this.systemPersonelDao.getOne(systemPersonnelId));
 	}
@@ -48,10 +48,11 @@ public class SystemPersonnelManager implements SystemPersonnelService{
 	@Override
 	public Result update(SystemPersonnel systemPersonnel) {
 		
-		SystemPersonnel systemPersonnelFromDb = this.systemPersonelDao.getOne(systemPersonnel.getSystemPersonnelId());
+		SystemPersonnel systemPersonnelFromDb = this.systemPersonelDao.getOne(systemPersonnel.getUserId());
 		
 		systemPersonnelFromDb.setFirstName(systemPersonnel.getFirstName());
 		systemPersonnelFromDb.setLastName(systemPersonnel.getLastName());
+		systemPersonnelFromDb.setEmail(systemPersonnel.getEmail());
 		
 		return new SuccessResult("Güncellendi");
 	}

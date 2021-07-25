@@ -28,7 +28,7 @@ public class JobAdvert {
 	private int advertId;
 	
 	@ManyToOne()
-	@JoinColumn(name="employer_id")
+	@JoinColumn(name="user_id")
 	private Employer employer;
 	
 	@ManyToOne()

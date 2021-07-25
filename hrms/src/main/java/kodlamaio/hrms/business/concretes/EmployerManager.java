@@ -15,6 +15,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.EmployerForUpdate;
+import kodlamaio.hrms.entities.dtos.EmployerForRegister;
 
 @Service
 public class EmployerManager implements EmployerService{
@@ -36,15 +37,29 @@ public class EmployerManager implements EmployerService{
 	}
 
 	@Override
-	public Result add(Employer employer) {
+	public Result add(EmployerForRegister employerForRegister) { 
 		
-		if(!this.emailService.isEmailVerified()) {
-			return new ErrorResult("Email Doğrulama kodunuzu onaylayınız.");
+		if(this.emailService.isEmailVerified()) {
+			
+			if(this.employerDao.getEmployerByEmail(employerForRegister.getEmail()) == null) {
+				
+				Employer employer = new Employer();
+				employer.setCompanyName(employerForRegister.getCompanyName());
+				employer.setWebSite(employerForRegister.getWebsite());
+				employer.setEmailVertification(true);
+				employer.setEmail(employerForRegister.getEmail());
+				employer.setPhoneNumber(employerForRegister.getPhoneNumber());
+				employer.setPassword(employerForRegister.getPassword());
+				
+				this.employerDao.save(employer);
+				
+				return new SuccessResult("Kayıt Başarılı");
+			}
+			
+			return new SuccessResult("Bu email ile zaten bir hesap oluşturulmuş!");
 		}
+		return new ErrorResult("Email Doğrulama kodunuzu onaylayınız.");
 		
-		this.employerDao.save(employer);
-		
-		return new SuccessResult("Kayıt Başarılı");
 	}
 	
 	@Override
@@ -56,6 +71,7 @@ public class EmployerManager implements EmployerService{
 		employerFromDb.setWebSite(employerForUpdate.getNewWebSite());
 		employerFromDb.setPhoneNumber(employerForUpdate.getNewPhoneNumber());
 		employerFromDb.setUpdateConfirmed(true);
+		employerFromDb.setEmail(employerForUpdate.getNewEmail());
 		
 		this.employerDao.save(employerFromDb);
 		
@@ -65,7 +81,7 @@ public class EmployerManager implements EmployerService{
 	@Override
 	public DataResult<Employer> getEmployerByEmployerId(int employerId) {
 		
-		return new SuccessDataResult(this.employerDao.getEmployerByEmployerId(employerId));
+		return new SuccessDataResult<Employer>(this.employerDao.getEmployerByUserId(employerId));
 
 	}
 

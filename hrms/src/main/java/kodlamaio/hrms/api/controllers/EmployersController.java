@@ -26,6 +26,7 @@ import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.EmployerForUpdate;
+import kodlamaio.hrms.entities.dtos.EmployerForRegister;
 
 @RestController
 @RequestMapping("/api/employers")
@@ -52,8 +53,8 @@ public class EmployersController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@Valid @RequestBody Employer employer) {
-		return this.employerService.add(employer);
+	public Result add(@Valid @RequestBody EmployerForRegister employerForRegister) {
+		return this.employerService.add(employerForRegister);
 	}
 	
 	@PostMapping("/update")

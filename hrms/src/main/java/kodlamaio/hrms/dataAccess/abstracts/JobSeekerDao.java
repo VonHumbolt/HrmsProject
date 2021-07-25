@@ -12,11 +12,13 @@ public interface JobSeekerDao extends JpaRepository<JobSeeker , Integer>{
 	
 	JobSeeker findByNationalIdentity(String nationalIdentity);
 	
-	@Query("Select new kodlamaio.hrms.entities.dtos.JobSeekerDetailsDto(j.jobSeekerId, jp.jobPositionName, j.firstName, j.lastName, j.nationalIdentity, j.dateOfBorn, i.imageUrl)" + 
+	JobSeeker findByEmail(String email);
+	
+	@Query("Select new kodlamaio.hrms.entities.dtos.JobSeekerDetailsDto(j.userId, jp.jobPositionName, j.firstName, j.lastName, j.nationalIdentity, j.dateOfBorn, i.imageUrl)" + 
 			"From JobSeeker j Inner Join j.jobPosition jp Inner Join j.userImage i")
 	List<JobSeekerDetailsDto> getJobSeekerDetailsDtos();
 	
-	@Query("Select new kodlamaio.hrms.entities.dtos.JobSeekerDetailsDto(j.jobSeekerId, jp.jobPositionName, j.firstName, j.lastName, j.nationalIdentity, j.dateOfBorn, i.imageUrl)" + 
-			"From JobSeeker j Inner Join j.jobPosition jp Inner Join j.userImage i where j.jobSeekerId=:jobSeekerId")
+	@Query("Select new kodlamaio.hrms.entities.dtos.JobSeekerDetailsDto(j.userId, jp.jobPositionName, j.firstName, j.lastName, j.nationalIdentity, j.dateOfBorn, i.imageUrl)" + 
+			"From JobSeeker j Inner Join j.jobPosition jp Inner Join j.userImage i where j.userId=:jobSeekerId")
 	JobSeekerDetailsDto getJobSeekerDetailDtoByJobSeekerId(int jobSeekerId);
 }

@@ -8,10 +8,12 @@ import kodlamaio.hrms.entities.concretes.Employer;
 
 public interface EmployerDao extends JpaRepository<Employer , Integer>{
 	
-	@Query("From Employer e where e.employerId=:employerId")
-	Employer getEmployerByEmployerId(int employerId);
+	@Query("From Employer e where e.userId=:employerId")
+	Employer getEmployerByUserId(int employerId);
 
 	
 	@Query("From Employer e where e.isUpdateConfirmed=false")
 	Employer getUnconfirmedEmployer();
+	
+	Employer getEmployerByEmail(String email);
 }

@@ -10,7 +10,7 @@ import kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto;
 
 public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer>  {
 	
-	List<JobAdvert> getByEmployer_EmployerId(int employerId);
+	List<JobAdvert> getByEmployer_UserId(int employerId);
 	
 	JobAdvert getByAdvertId(int advertId);
 	
@@ -31,7 +31,7 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer>  {
 	
 	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto(j.id, e.companyName, jb.jobPositionName, j.countOfJob, c.cityName,  j.minSalary, j.maxSalary, "
 			+ "j.jobDescription,j.publishedDate, j.deadline)" + 
-			"From JobAdvert j Inner Join j.jobPosition jb Inner Join j.city c Inner Join j.employer e where e.employerId=:employerId and j.isActive=true")
+			"From JobAdvert j Inner Join j.jobPosition jb Inner Join j.city c Inner Join j.employer e where e.userId=:employerId and j.isActive=true")
 	List<JobAdvertDetailsDto> getJobAdvertDetailsByEmployerId(int employerId);
 	
 	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto(j.id, e.companyName, jb.jobPositionName, j.countOfJob, c.cityName,  j.minSalary, j.maxSalary," +

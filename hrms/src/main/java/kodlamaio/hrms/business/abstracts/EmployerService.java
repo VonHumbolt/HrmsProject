@@ -6,10 +6,11 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.EmployerForUpdate;
+import kodlamaio.hrms.entities.dtos.EmployerForRegister;
 
 public interface EmployerService {
 	
-	Result add(Employer employer);
+	Result add(EmployerForRegister employerForRegister);
 	
 	Result update(EmployerForUpdate employerForUpdate);
 	
