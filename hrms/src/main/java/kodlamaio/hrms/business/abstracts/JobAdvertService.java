@@ -9,10 +9,6 @@ import kodlamaio.hrms.entities.dtos.JobAdvertDetailsDto;
 
 public interface JobAdvertService {
 	
-	DataResult<List<JobAdvert>> getAll();
-	
-	DataResult<List<JobAdvert>> getAll(int pageNo, int pageSize);
-	
 	DataResult<JobAdvert> getByAdvertId(int advertId);
 	
 	DataResult<JobAdvertDetailsDto> getJobAdvertDtoByAdvertId(int advertId);
@@ -32,4 +28,6 @@ public interface JobAdvertService {
 	DataResult<List<JobAdvertDetailsDto>> getJobAdvertDetailsDtosByEmployerId(int employerId);
 	
 	DataResult<List<JobAdvertDetailsDto>> getJobAdvertDetailsSortedByDeadline();
+	
+	DataResult<List<JobAdvert>> getAllActiveJobAdvertsAsPageable(int pageNo, int pageSize);
 }

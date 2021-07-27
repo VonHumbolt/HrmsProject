@@ -27,19 +27,6 @@ public class JobAdvertManager implements JobAdvertService{
 	}
 	
 	@Override
-	public DataResult<List<JobAdvert>> getAll() {
-		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll(),"İş İlanları Listelendi");
-	}
-
-	@Override
-	public DataResult<List<JobAdvert>> getAll(int pageNo, int pageSize) {
-		
-		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
-		
-		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll(pageable).getContent());
-	}
-
-	@Override
 	public DataResult<JobAdvert> getByAdvertId(int advertId) {
 		
 		return new SuccessDataResult<JobAdvert>(this.jobAdvertDao.getByAdvertId(advertId));
@@ -109,6 +96,13 @@ public class JobAdvertManager implements JobAdvertService{
 		
 		return new SuccessResult("İlan Onaylandı");
 		
+	}
+
+	@Override
+	public DataResult<List<JobAdvert>> getAllActiveJobAdvertsAsPageable(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
+		
+		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getAllActiveJobAdvertsAsPageable(pageable), "Active adverts are listed");
 	}
 
 

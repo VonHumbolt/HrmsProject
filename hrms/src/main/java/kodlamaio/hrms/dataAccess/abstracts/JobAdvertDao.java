@@ -2,6 +2,7 @@ package kodlamaio.hrms.dataAccess.abstracts;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -39,5 +40,7 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer>  {
 			"From JobAdvert j Inner Join j.jobPosition jb Inner Join j.city c Inner Join j.employer e Order By j.deadline DESC")
 	List<JobAdvertDetailsDto> getJobAdvertDetailsSortedByDeadline();
 	
+	@Query("From JobAdvert j where j.isActive=true")
+	List<JobAdvert> getAllActiveJobAdvertsAsPageable(Pageable pageable);
 	
 }

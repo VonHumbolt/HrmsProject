@@ -27,16 +27,6 @@ public class JobAdvertsController {
 		this.jobAdvertService = jobAdvertService;
 	}
 	
-	@GetMapping("/getAll")
-	public DataResult<List<JobAdvert>> getAll() {
-		return this.jobAdvertService.getAll();
-	}
-	
-	@GetMapping("/getAllByPage")
-	public DataResult<List<JobAdvert>> getAll(@RequestParam int pageNo, @RequestParam int pageSize) {
-		return this.jobAdvertService.getAll(pageNo, pageSize);
-	}
-	
 	@GetMapping("/getByAdvertId")
 	public DataResult<JobAdvert> getByAdvertId(@RequestParam int advertId) {
 		return this.jobAdvertService.getByAdvertId(advertId);
@@ -86,5 +76,10 @@ public class JobAdvertsController {
 	@GetMapping("/sortedByDeadline")
 	public DataResult<List<JobAdvertDetailsDto>> getJobAdvertDetailsSortedByDeadline(){
 		return this.jobAdvertService.getJobAdvertDetailsSortedByDeadline();
+	}
+	
+	@GetMapping("/getAllActiveJobAdvertsAsPageable")
+	public DataResult<List<JobAdvert>> getAllActiveJobAdvertsAsPageable(@RequestParam int pageNo, @RequestParam int pageSize) {
+		return this.jobAdvertService.getAllActiveJobAdvertsAsPageable(pageNo, pageSize);
 	}
 }
