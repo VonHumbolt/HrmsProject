@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.UserService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.User;
@@ -35,4 +36,17 @@ public class UserManager implements UserService {
 		return new SuccessDataResult<User>(this.userDao.getOne(userId));
 	}
 
+
+	@Override
+	public DataResult<User> getUserByEmail(String email) {
+		
+		if(this.userDao.findByEmail(email) == null) {
+			return new ErrorDataResult<User>("Bu Emaile sahip kullanıcı bulunamadı");
+		}
+		
+		return new SuccessDataResult<User>(this.userDao.findByEmail(email));
+	}
+
+	
+	
 }

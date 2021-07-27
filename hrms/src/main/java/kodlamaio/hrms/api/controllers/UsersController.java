@@ -36,4 +36,9 @@ public class UsersController {
 		return this.userService.getUserById(userId);
 	}
 
+	@GetMapping("/getUserByEmail")
+	public DataResult<User> getUserByEmail(@RequestParam String email) {
+		return this.userService.getUserByEmail(email);
+	}
+	
 }
